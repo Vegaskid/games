@@ -10,14 +10,11 @@ class Monty:
     def __init__(self, num_of_doors=3, player_door=1):
         """
         :param num_of_doors: must be >= 3
-        :param player_door: must be a door that can exist based on tnum_of_doors
+        :param player_door: must be a door that can exist based on num_of_doors
         """
         self.num_of_doors = num_of_doors
         self.player_door = player_door
         self._build_doors()
-        self.doors_start = []
-        self.doors_end = []
-        self.doors_temp = []
 
     def _pre_checks(self):
         """
@@ -51,13 +48,13 @@ class Monty:
         """
         while True:
             os.system('cls')
-            player_door = input("Please let me know which door you want to pick (1-{})".format(self.num_of_doors))
+            player_door = input(f"Please let me know which door you want to pick (1-{self.num_of_doors})")
             try:
                 if int(player_door) in range(self.num_of_doors):
                     self.player_door = player_door
                     break
             except ValueError:
-                print("You must enter a number between 1 and {}".format(self.num_of_doors))
+                print(f"You must enter a number between 1 and {self.num_of_doors}")
 
     def open_doors(self):
         """
@@ -104,17 +101,15 @@ class Monty:
             self._build_doors()
             self.open_doors()
             print("===========================================================")
-            print("Game number: {}".format(i + 1))
-            print("Doors at the start of the game: {}".format(self.doors_start))
+            print(f"Game number: {i + 1}")
+            print("Doors at the start of the game: {self.doors_start}")
             print("Player door: {}".format(self.player_door))
-            print("Last two doors, the player door, then the last unopened door: {}".format(self.doors_end))
+            print(f"Last two doors, the player door, then the last unopened door: {self.doors_end}")
             if self.doors_end[0] == "G":
                 count += 1
 
         print("===========================================================\n")
-        print("Number of times you picked a goat and therefore a switch would win you the car: {}".format(count))
-        print("Number of times you picked the car and therefore" +
-              "a switch would win you a goat: {}".format(number_of_runs - count))
-        print("\nProbability of winning the car due to a switch: {}".format(count / number_of_runs))
-        print(
-            "Probability of winning the car due to a switch, as a percentage: {}%".format(count / number_of_runs * 100))
+        print(f"Number of times you picked a goat and therefore a switch would win you the car: {count}")
+        print(f"Number of times you picked the car and therefore a switch would win you a goat: {number_of_runs - count}")
+        print(f"\nProbability of winning the car due to a switch: {count / number_of_runs}")
+        print(f"Probability of winning the car due to a switch, as a percentage: {count / number_of_runs * 100}%")
